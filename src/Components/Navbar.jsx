@@ -2,6 +2,7 @@ import React from "react";
 import brandLogo from "../assets/logo.png";
 import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer";
+import { LogOut } from "lucide-react";
 
 const links = (
   <>
@@ -77,9 +78,10 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <Link
-            className="btn"
+            className="relative overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group"
             to={"/register"}>
-            Register
+            <span className="relative z-10 group-hover:text-[#e81c2e] transition-colors duration-300"><span className="flex gap-3">Register <LogOut className="rotate-180"/></span> </span>
+            <span className="absolute inset-0 bg-base-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
           </Link>
         </div>
       </MyContainer>
