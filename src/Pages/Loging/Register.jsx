@@ -5,6 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Context/AuthContext";
 import MyContainer from "../../Components/MyContainer";
 import formBg from '../../assets/wave-haikei.png'
+import Spinner from "../../Components/Spinner";
 
 const Register = () => {
   const { createUser, updateUserProfile, signInWithGoogle } = useContext(AuthContext);
