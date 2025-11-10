@@ -1,14 +1,90 @@
-import React from 'react';
+import React from "react";
+import brandLogo from "../assets/logo.png";
+import { Link, NavLink } from "react-router";
+import MyContainer from "./MyContainer";
 
+const links = (
+  <>
+    <li>
+      <NavLink
+        
+        to={"/"}>
+        Home
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink to={"/all-vehicles"}>All Vehicles</NavLink>
+    </li>
+    <li>
+      <NavLink to={"/add-vehicles"}>Add Vehicles</NavLink>
+    </li>
+    <li>
+      <NavLink to={"/my-bookings"}>My Bookings</NavLink>
+    </li>
+    <li>
+      <NavLink to={"/my-vehicles"}>My Vehicles</NavLink>
+    </li>
+  </>
+);
 const Navbar = () => {
-    return (
-        <div>
-            <h3 className="text-3xl text-primary">Primary</h3>
-            <h3 className="text-3xl text-header">Primary</h3>
-            <h3 className="text-3xl text-sub">Primary</h3>
-            
+  return (
+    <nav className="shadow-sm nav-bg bg-black opacity-80">
+      <MyContainer className="navbar">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn bg-[#e81c2e] shadow-none border-0 text-white
+                btn-hover-header
+                hover:text-[#e81c2e]
+               transition duration-300 ease-in-out
+               hover:scale-105 lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                {" "}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />{" "}
+              </svg>
+            </div>
+            <ul
+              tabIndex="-1"
+              className="menu menu-sm dropdown-content bg-[#000000bf] rounded-box z-1 mt-3 w-52 p-2 shadow">
+              {links}
+            </ul>
+          </div>
+          <Link
+            to={"/"}
+            className="btn bg-transparent border-0 shadow-none text-xl">
+            <img
+              className="w-12 rounded-full"
+              src={brandLogo}
+              alt="brand logo"
+            />
+          </Link>
         </div>
-    );
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{links}</ul>
+        </div>
+        <div className="navbar-end">
+          <Link
+            className="btn"
+            to={"/register"}>
+            Register
+          </Link>
+        </div>
+      </MyContainer>
+    </nav>
+  );
 };
 
 export default Navbar;

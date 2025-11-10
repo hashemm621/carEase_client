@@ -2,32 +2,54 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* Custom global colors */
-:root {
-  --color-primary: #E81C2E;
-  --color-secondary: #CCB686;
-  --color-text: #000000BF;
-  --color-header: #19191B;
-  --color-accent: #CCB686;
-  --color-bg: #FFFFFFCC;
+/* :root {
+  --color-primary: #e81c2e;
+  --color-secondary: #ccb686;
+  --color-text: #000000bf;
+  --color-header: #19191b;
+  --color-accent: #ccb686;
+  --color-bg: #ffffffcc;
   --color-subText: #ffffff9f;
-}
+} */
 
-/* Optional: global body styling */
 body {
   font-family: "Poppins", sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: #000000bf;
+  background-color: #ffffffcc;
 }
 
-/* Tailwind-compatible custom utilities */
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-header { color: var(--color-header); }
-.text-accent { color: var(--color-accent); }
-.text-subText { color: var(--color-subText); }
 
-.bg-primary { background-color: var(--color-primary); }
-.bg-secondary { background-color: var(--color-secondary); }
-.bg-accent { background-color: var(--color-accent); }
-.bg-bg { background-color: var(--color-bg); }
+
+.btn-hover-header:hover {
+  color: '#e81c2e';
+  background-color: transparent;
+}
+
+nav ul li {
+  color: white;
+  position: relative;
+  font-weight: 700;
+  transition: color 0.3s ease-in-out;
+}
+
+nav ul li::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; 
+  width: 0;
+  height: 2px; 
+  background-color: #e81c2e;
+  transition: width 0.3s ease-in-out;
+}
+nav ul li:hover::after{
+  width: 100%;
+}
+nav ul li .active{
+  color: crimson;
+}
+nav ul li.active::after{
+  width: 100%;
+}
+
+
