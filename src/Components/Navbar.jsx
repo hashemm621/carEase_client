@@ -7,50 +7,42 @@ import { AuthContext } from "../Context/AuthContext";
 import { FaUser } from "react-icons/fa";
 import { ImBoxAdd } from "react-icons/im";
 
-
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-    const {user, signOutUser} = useContext(AuthContext)
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-      useEffect(() => {
-        const html = document.querySelector("html");
-        html.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
-      }, [theme]);
-    
-      const handleTheme = checked => {
-        setTheme(checked ? "dark" : "light");
-      };
+  const handleTheme = checked => {
+    setTheme(checked ? "dark" : "light");
+  };
 
+  const links = (
+    <>
+      <li>
+        <NavLink to={"/"}>Home</NavLink>
+      </li>
 
-
-    const links = (
-  <>
-    <li>
-      <NavLink
-        
-        to={"/"}>
-        Home
-      </NavLink>
-    </li>
-
-    <li>
-      <NavLink to={"/all-vehicles"}>All Vehicles</NavLink>
-    </li>
-    <li>
-      <NavLink to={"/add-vehicles"}>Add Vehicles</NavLink>
-    </li>
-    <li>
-      <NavLink to={"/my-bookings"}>My Bookings</NavLink>
-    </li>
-    <li>
-      <NavLink to={"/my-vehicles"}>My Vehicles</NavLink>
-    </li>
-  </>
-);
+      <li>
+        <NavLink to={"/all-vehicles"}>All Vehicles</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/add-vehicles"}>Add Vehicles</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/my-bookings"}>My Bookings</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/my-vehicles"}>My Vehicles</NavLink>
+      </li>
+    </>
+  );
   return (
-    <nav className="shadow-sm nav-bg bg-black opacity-80 py-2">
+    <nav className="shadow-sm nav-bg bg-blue-900 opacity-80 py-2 z-999 w-full">
       <MyContainer className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
@@ -79,7 +71,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-gray-700 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-gray-700 rounded-box z-999 mt-3 w-52 p-2 shadow">
               {links}
             </ul>
           </div>
@@ -97,67 +89,66 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-
-
-        {user ? (
-          <div className="dropdown dropdown-end z-50">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-circle avatar">
-              <div className="w-9 border-2 border-[#e81c2e] rounded-full">
-                <img
-                  alt="user profile image"
-                  referrerPolicy="no-referrer"
-                  src={
-                    user?.photoURL ||
-                    <User2Icon/>
-                  }
+          {user ? (
+            <div className="dropdown dropdown-end z-50">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-circle avatar">
+                <div className="w-9 border-2 border-[#e81c2e] rounded-full">
+                  <img
+                    alt="user profile image"
+                    referrerPolicy="no-referrer"
+                    src={user?.photoURL || <User2Icon />}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex="-1"
+                className="menu  menu-sm dropdown-content bg-gray-700 rounded-box z-50 mt-3 w-52 p-2 shadow">
+                <div className=" pb-3 border-b border-b-gray-200">
+                  <li className="text-sm font-bold">{user.displayName}</li>
+                  <li className="text-xs">{user.email}</li>
+                </div>
+                <li className="mt-3">
+                  <Link to={"/profile"}>
+                    <FaUser /> Profile
+                  </Link>
+                </li>
+                <input
+                  onChange={e => handleTheme(e.target.checked)}
+                  type="checkbox"
+                  defaultChecked={localStorage.getItem("theme") === "dark"}
+                  className="toggle"
                 />
-              </div>
+
+                <li>
+                  <button
+                    onClick={signOutUser}
+                    className="relative overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group"
+                    to={"/register"}>
+                    <span className="relative z-10 group-hover:text-[#e81c2e] transition-colors duration-300">
+                      <span className="flex gap-3">
+                        Logout <LogOut />
+                      </span>{" "}
+                    </span>
+                    <span className="absolute inset-0 bg-base-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
+                  </button>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex="-1"
-              className="menu  menu-sm dropdown-content bg-gray-700 rounded-box z-50 mt-3 w-52 p-2 shadow">
-              <div className=" pb-3 border-b border-b-gray-200">
-                <li className="text-sm font-bold">{user.displayName}</li>
-                <li className="text-xs">{user.email}</li>
-              </div>
-              <li className="mt-3">
-                <Link to={"/profile"}>
-                  <FaUser /> Profile
-                </Link>
-              </li>
-              <input
-                onChange={e => handleTheme(e.target.checked)}
-                type="checkbox"
-                defaultChecked={localStorage.getItem("theme") === "dark"}
-                className="toggle"
-              />
-
-              <li>
-                <button
-                onClick={signOutUser}
-            className="relative overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group"
-            to={"/register"}>
-            <span className="relative z-10 group-hover:text-[#e81c2e] transition-colors duration-300"><span className="flex gap-3">Logout <LogOut/></span> </span>
-            <span className="absolute inset-0 bg-base-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
-          </button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <Link
-          
-            className="relative outline-0 overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group"
-            to={"/register"}>
-            <span className="relative z-10 group-hover:text-[#e81c2e] transition-colors duration-300"><span className="flex gap-3">Register <LogOut className="rotate-180"/></span> </span>
-            <span className="absolute inset-0 bg-base-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
-          </Link>
-        )}
-
-
-          
+          ) : (
+            <Link
+              className="relative outline-0 overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group"
+              to={"/register"}>
+              <span className="relative z-10 group-hover:text-[#e81c2e] transition-colors duration-300">
+                <span className="flex gap-3">
+                  Register <LogOut className="rotate-180" />
+                </span>{" "}
+              </span>
+              <span className="absolute inset-0 bg-base-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
+            </Link>
+          )}
         </div>
       </MyContainer>
     </nav>
