@@ -9,7 +9,7 @@ import Signin from "../Pages/Loging/Signin";
 import Home from "../Pages/Home/Home";
 import PrivateRoute from "./PriveteRoute";
 import UpdateProfile from "../Pages/UpdateProfile";
-import DetailVehicles from "../Pages/DetailVehicles/DetailVehicles";
+import DetailsVehicles from "../Pages/DetailVehicles/DetailsVehicles";
 
 const router = createBrowserRouter([
   {
@@ -67,12 +67,14 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/detailsVehicles",
+        path: "/detailsVehicles/:id",
         element: (
           <PrivateRoute>
-            <DetailVehicles/>
+            <DetailsVehicles />
           </PrivateRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/details-car/${params.id}`),
       },
     ],
   },
