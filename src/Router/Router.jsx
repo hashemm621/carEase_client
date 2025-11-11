@@ -7,6 +7,9 @@ import MyVehicles from "../Pages/MyVehicles/MyVehicles";
 import Register from "../Pages/Loging/Register";
 import Signin from "../Pages/Loging/Signin";
 import Home from "../Pages/Home/Home";
+import PrivateRoute from "./PriveteRoute";
+import UpdateProfile from "../Pages/UpdateProfile";
+import DetailVehicles from "../Pages/DetailVehicles/DetailVehicles";
 
 const router = createBrowserRouter([
   {
@@ -16,22 +19,36 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: () => fetch("http://localhost:3000/latest-cars"),
       },
       {
         path: "/all-vehicles",
         element: <AllVehicles />,
+        loader: () => fetch("http://localhost:3000/latest-cars"),
       },
       {
         path: "/add-vehicles",
-        element: <AddVehicles />,
+        element: (
+          <PrivateRoute>
+            <AddVehicles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-bookings",
-        element: <MyBookings />,
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-vehicles",
-        element: <MyVehicles />,
+        element: (
+          <PrivateRoute>
+            <MyVehicles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/register",
@@ -40,6 +57,22 @@ const router = createBrowserRouter([
       {
         path: "/signin",
         element: <Signin />,
+      },
+      {
+        path: "/updateProfile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/detailsVehicles",
+        element: (
+          <PrivateRoute>
+            <DetailVehicles/>
+          </PrivateRoute>
+        ),
       },
     ],
   },

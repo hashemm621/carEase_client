@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import brandLogo from "../assets/logo.png";
 import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer";
-import { LogOut, LogOutIcon, User2Icon } from "lucide-react";
+import { LogOut, LogOutIcon, Moon, Sun, User2Icon } from "lucide-react";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUser } from "react-icons/fa";
 import { ImBoxAdd } from "react-icons/im";
@@ -20,6 +20,7 @@ const Navbar = () => {
   const handleTheme = checked => {
     setTheme(checked ? "dark" : "light");
   };
+  const isDark = localStorage.getItem("theme") === "dark";
 
   const links = (
     <>
@@ -111,16 +112,36 @@ const Navbar = () => {
                   <li className="text-xs">{user.email}</li>
                 </div>
                 <li className="mt-3">
-                  <Link to={"/profile"}>
+                  <Link to={"/updateProfile"}>
                     <FaUser /> Profile
                   </Link>
                 </li>
-                <input
-                  onChange={e => handleTheme(e.target.checked)}
-                  type="checkbox"
-                  defaultChecked={localStorage.getItem("theme") === "dark"}
-                  className="toggle"
-                />
+
+                <div className="flex items-center justify-center space-y-4 space-x-5">
+                  <Sun
+                    className={`w-5 h-5 transition-colors duration-300 ${
+                      isDark ? "text-gray-400" : "text-yellow-400"
+                    }`}
+                  />
+
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      defaultChecked={isDark}
+                      onChange={e => handleTheme(e.target.checked)}
+                    />
+                    <div className="w-12 h-6 bg-gray-300 rounded-full peer dark:bg-gray-600 peer-focus:ring-2 peer-focus:ring-offset-1 peer-focus:ring-indigo-500 transition-colors duration-300"></div>
+                    <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transform transition-transform duration-300 peer-checked:translate-x-6"></div>
+                  </label>
+
+                  {/* Moon Icon */}
+                  <Moon
+                    className={`w-5 h-5 transition-colors duration-300 ${
+                      isDark ? "text-blue-200" : "text-gray-400"
+                    }`}
+                  />
+                </div>
 
                 <li>
                   <button
