@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import brandLogo from "../assets/logo.png";
 import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer";
-import { LogOut, LogOutIcon } from "lucide-react";
+import { LogOut, LogOutIcon, User2Icon } from "lucide-react";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUser } from "react-icons/fa";
 import { ImBoxAdd } from "react-icons/im";
@@ -23,7 +23,6 @@ const Navbar = () => {
         setTheme(checked ? "dark" : "light");
       };
 
-    console.log(user);
 
 
     const links = (
@@ -105,14 +104,14 @@ const Navbar = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar">
-              <div className="w-9 border-2 border-gray-300 rounded-full">
+              className="btn btn-circle avatar">
+              <div className="w-9 border-2 border-[#e81c2e] rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
+                  alt="user profile image"
                   referrerPolicy="no-referrer"
                   src={
-                    user.photoURL ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    user?.photoURL ||
+                    <User2Icon/>
                   }
                 />
               </div>
