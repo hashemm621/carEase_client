@@ -7,7 +7,6 @@ import { Link } from "react-router";
 
 const CarsCard = ({car}) => {
 
-    console.log(car);
     const {categories,coverImage,pricePerDay,location,vehicleName,rating,description} = car
     
   return (
@@ -24,7 +23,7 @@ const CarsCard = ({car}) => {
       <div className="card bg-base-100 shadow-sm flex grow">
   <figure>
     <img
-    className="w-full"
+    className="w-full h-[200px]"
       src={coverImage}
       alt="car image" />
   </figure>
