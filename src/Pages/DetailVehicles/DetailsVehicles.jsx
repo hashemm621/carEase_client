@@ -1,12 +1,14 @@
-import React from "react";
-import { useLoaderData } from "react-router";
+import React, { useContext } from "react";
+import { useLoaderData} from "react-router";
 import LoadingPage from "../../Components/LoadingPage";
 import MyContainer from "../../Components/MyContainer";
 import { FaStar, FaLocationDot } from "react-icons/fa6";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Context/AuthContext";
 
 const DetailsVehicles = () => {
   const car = useLoaderData();
+  const {user} = useContext(AuthContext)
 
   if (!car) return <LoadingPage />;
 
@@ -37,7 +39,8 @@ const DetailsVehicles = () => {
       rating: car.rating,
       userEmail: car.userEmail,
       vehicleName: car.vehicleName,
-      vehicleId: car._id
+      vehicleId: car._id,
+      bookingUserEmail:user.email
     };
     fetch(`http://localhost:3000/bookings/${car._id}`, {
       method: "POST",
