@@ -1,7 +1,8 @@
 import React from "react";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Link } from "react-router";
-const MyCarsCard = ({ car }) => {
+
+const MyCarsCard = ({ car, onDelete }) => {
   const {
     coverImage,
     vehicleName,
@@ -61,7 +62,9 @@ const MyCarsCard = ({ car }) => {
           <button className="w-1/3 py-2 rounded-md font-semibold text-white bg-[#e81c2e] hover:bg-[#ffff] hover:text-[#c41726] border border-[#c41726] transition">
             Update
           </button>
-          <button className="w-1/3 py-2 rounded-md font-semibold text-white bg-[#222] hover:bg-[#333] transition">
+          <button
+            onClick={() => onDelete(_id)}
+            className="w-1/3 py-2 rounded-md font-semibold text-white bg-[#222] hover:bg-[#333] transition">
             Delete
           </button>
           <Link
