@@ -1,16 +1,22 @@
-# React + Vite
+### This is a CarEase Web app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##### Client Repo: https://github.com/hashemm621/carEase_client
 
-Currently, two official plugins are available:
+#####  Server Repo: https://github.com/hashemm621/carEase_server
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+#### Live Link: https://github.com/hashemm621/carEase_server  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## Features
+
+- Browse a wide range of vehicles including cars, SUVs, trucks, and luxury cars.
+- Add and manage your own vehicles with availability options.
+- Seamless booking system to manage all your bookings in one place.
+- Secure authentication with Firebase for safe login and profile management.
+- Transparent pricing per day along with vehicle location details.
+- Highlight trusted vehicle owners and featured vehicles.
+- Responsive and interactive UI built with React, Tailwind CSS, and Framer Motion.
