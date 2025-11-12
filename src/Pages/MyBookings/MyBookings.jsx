@@ -57,6 +57,7 @@ const MyBookings = () => {
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 py-12 px-4">
+        <title>My Bookings</title>
       <div className="text-center mb-10">
         <h2 className="text-4xl font-extrabold text-gray-800 dark:text-[#e81c2e]">
           My Bookings

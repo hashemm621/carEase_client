@@ -56,6 +56,7 @@ const MyVehicles = () => {
 
   return (
     <div>
+      <title>My Vehicles</title>
       <div className="bg-linear-to-r from-[#e81c2e] to-[#ff6b81] text-white py-16 text-center  shadow-lg">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide mb-3">
           Vehicle Details

@@ -10,6 +10,7 @@ import Home from "../Pages/Home/Home";
 import PrivateRoute from "./PriveteRoute";
 import UpdateProfile from "../Pages/UpdateProfile";
 import DetailsVehicles from "../Pages/DetailVehicles/DetailsVehicles";
+import UpdateVehicles from "../Pages/UpdateVehicles/UpdateVehicles";
 
 const router = createBrowserRouter([
   {
@@ -76,8 +77,21 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/details-car/${params.id}`),
       },
+      {
+        path: "/updateVehicles/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateVehicles />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/all-cars/${params.id}`),
+      },
     ],
   },
 ]);
 
 export default router;
+
+
+

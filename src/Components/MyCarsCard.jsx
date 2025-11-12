@@ -59,9 +59,9 @@ const MyCarsCard = ({ car, onDelete }) => {
 
         {/* Buttons */}
         <div className="flex justify-between gap-3 mt-4">
-          <button className="w-1/3 py-2 rounded-md font-semibold text-white bg-[#e81c2e] hover:bg-[#ffff] hover:text-[#c41726] border border-[#c41726] transition">
+          <Link to={`/updateVehicles/${_id}`} className="w-1/3 btn py-2 rounded-md font-semibold text-white bg-[#e81c2e] hover:bg-[#ffff] hover:text-[#c41726] border border-[#c41726] transition">
             Update
-          </button>
+          </Link>
           <button
             onClick={() => onDelete(_id)}
             className="w-1/3 py-2 rounded-md font-semibold text-white bg-[#222] hover:bg-[#333] transition">

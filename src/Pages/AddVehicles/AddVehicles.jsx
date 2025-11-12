@@ -45,6 +45,7 @@ const AddVehicles = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-[#e81c2e] to-[#ff6b81] flex items-center justify-center py-10 px-4">
+      <title>Add Vehicles</title>
       <form
         onSubmit={handleSubmit}
         className="bg-white dark:bg-gray-900 shadow-2xl rounded-2xl p-8 w-full max-w-2xl space-y-5">
