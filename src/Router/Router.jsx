@@ -11,6 +11,7 @@ import PrivateRoute from "./PriveteRoute";
 import UpdateProfile from "../Pages/UpdateProfile";
 import DetailsVehicles from "../Pages/DetailVehicles/DetailsVehicles";
 import UpdateVehicles from "../Pages/UpdateVehicles/UpdateVehicles";
+import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 
 const router = createBrowserRouter([
   {
@@ -88,7 +89,10 @@ const router = createBrowserRouter([
           fetch(`http://localhost:3000/all-cars/${params.id}`),
       },
     ],
-  },
+  },{
+    path:"*",
+    element: <PageNotFound/>
+  }
 ]);
 
 export default router;
