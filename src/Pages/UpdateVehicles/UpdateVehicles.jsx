@@ -19,13 +19,14 @@ const UpdateVehicles = () => {
       location: form.location.value,
       description: form.description.value,
     };
-    fetch(`http://localhost:3000/all-cars/${data?._id}`,{
-        method:'PUT',
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-    }) .then(res => res.json())
+    fetch(`https://travel-ease-server-eight.vercel.app/all-cars/${data?._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(res => res.json())
       .then(data => {
         console.log(data);
         toast.success("Successfully updated!");

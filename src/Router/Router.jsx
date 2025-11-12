@@ -21,12 +21,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: () => fetch("http://localhost:3000/latest-cars"),
+        loader: () =>
+          fetch("https://travel-ease-server-eight.vercel.app/latest-cars"),
       },
       {
         path: "/all-vehicles",
         element: <AllVehicles />,
-        loader: () => fetch("http://localhost:3000/all-cars"),
+        loader: () =>
+          fetch("https://travel-ease-server-eight.vercel.app/all-cars"),
       },
       {
         path: "/add-vehicles",
@@ -76,7 +78,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/details-car/${params.id}`),
+          fetch(
+            `https://travel-ease-server-eight.vercel.app/details-car/${params.id}`
+          ),
       },
       {
         path: "/updateVehicles/:id",
@@ -86,16 +90,16 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/all-cars/${params.id}`),
+          fetch(
+            `https://travel-ease-server-eight.vercel.app/all-cars/${params.id}`
+          ),
       },
     ],
-  },{
-    path:"*",
-    element: <PageNotFound/>
-  }
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
+  },
 ]);
 
 export default router;
-
-
-

@@ -9,11 +9,14 @@ const MyVehicles = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-cars?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    fetch(
+      `https://travel-ease-server-eight.vercel.app/my-cars?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    )
       .then(res => res.json())
       .then(data => {
         setCars(data);
@@ -32,7 +35,7 @@ const MyVehicles = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(result => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/all-cars/${id}`, {
+        fetch(`https://travel-ease-server-eight.vercel.app/all-cars/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

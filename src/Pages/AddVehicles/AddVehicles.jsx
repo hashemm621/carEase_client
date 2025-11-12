@@ -5,43 +5,45 @@ import toast from "react-hot-toast";
 const AddVehicles = () => {
   const { user } = useContext(AuthContext);
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const form = e.target;
 
- const handleSubmit = async e => {
-  e.preventDefault();
-  const form = e.target;
+    const formData = {
+      vehicleName: form.vehicleName.value,
+      owner: form.owner.value,
+      category: form.categories.value,
+      pricePerDay: form.pricePerDay.value,
+      location: form.location.value,
+      availability: form.availability.checked,
+      description: form.description.value,
+      coverImage: form.coverImage.value,
+      userEmail: form.userEmail.value,
+      createdAt: new Date(),
+      categories: form.categories.value,
+      rating: (Math.random() * (5 - 3) + 3).toFixed(1),
+    };
 
-  const formData = {
-    vehicleName: form.vehicleName.value,
-    owner: form.owner.value,
-    category: form.categories.value,
-    pricePerDay: form.pricePerDay.value,
-    location: form.location.value,
-    availability: form.availability.checked,
-    description: form.description.value,
-    coverImage: form.coverImage.value,
-    userEmail: form.userEmail.value,
-    createdAt: new Date(),
-    categories: form.categories.value,
-    rating: (Math.random() * (5 - 3) + 3).toFixed(1),
-  };
+    try {
+      const res = await fetch(
+        "https://travel-ease-server-eight.vercel.app/all-cars",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+      const data = await res.json();
 
-  try {
-    const res = await fetch("http://localhost:3000/all-cars", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-
-    if (data.success) {
-      toast.success("Vehicle added successfully!");
-      form.reset(); 
+      if (data.success) {
+        toast.success("Vehicle added successfully!");
+        form.reset();
+      }
+    } catch (err) {
+      toast.error("Something went wrong!");
+      console.error(err);
     }
-  } catch (err) {
-    toast.error("Something went wrong!");
-    console.error(err);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-[#e81c2e] to-[#ff6b81] flex items-center justify-center py-10 px-4">

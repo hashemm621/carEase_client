@@ -43,7 +43,7 @@ const DetailsVehicles = () => {
       vehicleId: car._id,
       bookingUserEmail: user.email,
     };
-    fetch(`http://localhost:3000/bookings/${car._id}`, {
+    fetch(`https://travel-ease-server-eight.vercel.app/bookings/${car._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

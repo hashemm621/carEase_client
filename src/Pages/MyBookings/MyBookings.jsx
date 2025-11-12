@@ -11,53 +11,55 @@ const MyBookings = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/bookings?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    fetch(
+      `https://travel-ease-server-eight.vercel.app/bookings?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    )
       .then(res => res.json())
       .then(data => setBooking(data))
       .catch(err => console.log(err));
   }, [user.accessToken, user.email]);
 
-
-  const submitCancel = (id) =>{
-        Swal.fire({
-              title: "Are you sure?",
-              text: "You won't be able to revert this!",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Yes, Cancel it!",
-            }).then(result => {
-              if (result.isConfirmed) {
-                fetch(`http://localhost:3000/bookings/${id}`, {
-                  method: "DELETE",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                })
-                  .then(res => res.json())
-                  .then(() => {
-                    setBooking(prevCars => prevCars.filter(car => car._id !== id));
-                    Swal.fire({
-                      title: "Canceled!",
-                      text: "Your ride has been Canceled.",
-                      icon: "success",
-                    });
-                  })
-                  .catch(err => {
-                    console.log(err);
-                  });
-              }
+  const submitCancel = id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Cancel it!",
+    }).then(result => {
+      if (result.isConfirmed) {
+        fetch(`https://travel-ease-server-eight.vercel.app/bookings/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(res => res.json())
+          .then(() => {
+            setBooking(prevCars => prevCars.filter(car => car._id !== id));
+            Swal.fire({
+              title: "Canceled!",
+              text: "Your ride has been Canceled.",
+              icon: "success",
             });
-  }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    });
+  };
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 py-12 px-4">
-        <title>My Bookings</title>
+      <title>My Bookings</title>
       <div className="text-center mb-10">
         <h2 className="text-4xl font-extrabold text-gray-800 dark:text-[#e81c2e]">
           My Bookings
