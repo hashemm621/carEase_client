@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
-import { useLoaderData} from "react-router";
+import { useLoaderData } from "react-router";
 import LoadingPage from "../../Components/LoadingPage";
 import MyContainer from "../../Components/MyContainer";
 import { FaStar, FaLocationDot } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthContext";
+import { format } from "date-fns";
 
 const DetailsVehicles = () => {
   const car = useLoaderData();
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   if (!car) return <LoadingPage />;
 
@@ -40,7 +41,7 @@ const DetailsVehicles = () => {
       userEmail: car.userEmail,
       vehicleName: car.vehicleName,
       vehicleId: car._id,
-      bookingUserEmail:user.email
+      bookingUserEmail: user.email,
     };
     fetch(`http://localhost:3000/bookings/${car._id}`, {
       method: "POST",
@@ -50,18 +51,18 @@ const DetailsVehicles = () => {
       body: JSON.stringify(bookingCar),
     })
       .then(res => {
-        if(!res.ok){
-            throw new Error('Failed to book the vehicle')
+        if (!res.ok) {
+          throw new Error("Failed to book the vehicle");
         }
-        return res.json()
-      }).then(bookedCar=>{
-        console.log(bookedCar);
-        toast.success('Booking Successful')
-      }).catch((err) => {
-      console.error(err);
-      toast.error("Something went wrong!");
-    })
-      
+        return res.json();
+      })
+      .then(bookedCar => {
+        toast.success("Booking Successful", bookedCar.acknowledged);
+      })
+      .catch(err => {
+        console.error(err);
+        toast.error("Something went wrong!");
+      });
   };
 
   return (
@@ -140,7 +141,7 @@ const DetailsVehicles = () => {
           </p>
 
           <p className="mb-4 text-gray-500 dark:text-gray-400 text-sm">
-            Posted on: {new Date(createdAt).toLocaleDateString()}
+            Posted on: {format(new Date(createdAt), "dd MMM yyyy, HH:mm")}
           </p>
 
           <button
