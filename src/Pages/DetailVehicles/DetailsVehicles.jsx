@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router"; // ১. useNavigate ইম্পোর্ট করুন
 import LoadingPage from "../../Components/LoadingPage";
 import MyContainer from "../../Components/MyContainer";
 import { FaStar, FaLocationDot } from "react-icons/fa6";
@@ -10,6 +10,7 @@ import { format } from "date-fns";
 const DetailsVehicles = () => {
   const car = useLoaderData();
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate(); // ২. নেভিগেট ডিক্লেয়ার করুন
 
   if (!car) return <LoadingPage />;
 
@@ -28,6 +29,12 @@ const DetailsVehicles = () => {
   } = car;
 
   const handleBooking = () => {
+    
+    if (!user) {
+      toast.error("Please login first to book a vehicle!");
+      return navigate("/register");
+    }
+
     const bookingCar = {
       availability: car.availability,
       categories: car.categories,
@@ -41,8 +48,9 @@ const DetailsVehicles = () => {
       userEmail: car.userEmail,
       vehicleName: car.vehicleName,
       vehicleId: car._id,
-      bookingUserEmail: user.email,
+      bookingUserEmail: user?.email,
     };
+
     fetch(`https://travel-ease-server-eight.vercel.app/bookings/${car._id}`, {
       method: "POST",
       headers: {
@@ -50,16 +58,16 @@ const DetailsVehicles = () => {
       },
       body: JSON.stringify(bookingCar),
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to book the vehicle");
         }
         return res.json();
       })
-      .then(bookedCar => {
-        toast.success("Booking Successful", bookedCar.acknowledged);
+      .then((bookedCar) => {
+        toast.success("Booking Successful");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         toast.error("Something went wrong!");
       });
@@ -146,7 +154,8 @@ const DetailsVehicles = () => {
 
           <button
             onClick={handleBooking}
-            className="relative overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group">
+            className="relative overflow-hidden bg-[#e81c2e] text-white border-0 shadow-none px-5 py-2 font-semibold rounded-md transition-all duration-300 group"
+          >
             <span className="relative z-10 group-hover:text-[#e81c2e] transition-colors duration-300">
               <span className="flex gap-3 justify-center">Book Now</span>{" "}
             </span>

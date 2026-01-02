@@ -73,9 +73,9 @@ const router = createBrowserRouter([
       {
         path: "/detailsVehicles/:id",
         element: (
-          <PrivateRoute>
+          
             <DetailsVehicles />
-          </PrivateRoute>
+          
         ),
         loader: ({ params }) =>
           fetch(
